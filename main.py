@@ -4,15 +4,16 @@ from PyQt5.QtGui import QPainter, QColor
 from PyQt5.QtWidgets import QWidget, QApplication
 from PyQt5 import uic
 from random import randint
+from ui_file import Ui_Form
 
 
-class Example(QWidget):
+class Example(QWidget, Ui_Form):
     def __init__(self):
         super().__init__()
+        self.setupUi(self)
         self.initUI()
 
     def initUI(self):
-        uic.loadUi('Ui.ui', self)
         self.do_paint = False
         self.btn.clicked.connect(self.paint)
 
@@ -28,7 +29,7 @@ class Example(QWidget):
         self.repaint()
 
     def draw_flag(self, qp):
-        qp.setBrush(QColor(255, 255, 0))
+        qp.setBrush(QColor(randint(0, 200), randint(0, 200), randint(0, 200)))
         qp.drawEllipse(randint(0, 200), randint(0, 200), randint(10, 50), randint(10, 50))
 
 
@@ -42,5 +43,3 @@ if __name__ == '__main__':
     ex.show()
     sys.excepthook = except_hook
     sys.exit(app.exec())
-
-print('hi')
